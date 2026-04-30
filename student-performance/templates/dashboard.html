@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+  <div class="page">
+    <div class="layout single-col">
+      <section class="panel">
+        <div class="top-row">
+          <div>
+            <p class="eyebrow">Dashboard</p>
+            <h1>Student Prediction Overview</h1>
+          </div>
+          <a href="/" class="link-btn">
+            Back Home
+          </a>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card dark">
+            <p class="stat-label">Total Students</p>
+            <p class="stat-value">{{ total_students }}</p>
+          </div>
+          <div class="stat-card">
+            <p class="stat-label">Excellent</p>
+            <p class="stat-value accent-green">{{ prediction_counts.get("Excellent", 0) }}</p>
+          </div>
+          <div class="stat-card">
+            <p class="stat-label">Good</p>
+            <p class="stat-value accent-blue">{{ prediction_counts.get("Good", 0) }}</p>
+          </div>
+          <div class="stat-card">
+            <p class="stat-label">Average</p>
+            <p class="stat-value accent-amber">{{ prediction_counts.get("Average", 0) }}</p>
+          </div>
+          <div class="stat-card">
+            <p class="stat-label">Needs Improvement</p>
+            <p class="stat-value accent-rose">{{ prediction_counts.get("Needs Improvement", 0) }}</p>
+          </div>
+        </div>
+
+        {% if records %}
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Attendance</th>
+                <th>Study Hours</th>
+                <th>Assignments</th>
+                <th>Prediction</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for record in records %}
+              <tr>
+                <td>{{ record.id }}</td>
+                <td>{{ record.attendance }}</td>
+                <td>{{ record.study_hours }}</td>
+                <td>{{ record.assignments }}</td>
+                <td class="pred-cell">{{ record.prediction }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% else %}
+        <div class="placeholder light">
+          No student records found yet. Submit a prediction from the home page to populate the dashboard.
+        </div>
+        {% endif %}
+      </section>
+    </div>
+  </div>
+</body>
+
+</html>
