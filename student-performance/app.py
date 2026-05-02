@@ -2,6 +2,7 @@ import sqlite3
 from collections import Counter
 from pathlib import Path
 import pickle
+import os
 
 from flask import Flask, render_template, request
 
@@ -136,4 +137,8 @@ init_db()
 
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", 5000)),
+        debug=False
+    )
