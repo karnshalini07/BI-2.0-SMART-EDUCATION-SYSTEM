@@ -17,8 +17,8 @@ instance/
 student-performance/.venv/
 student-performance/__pycache__/
 student-performance/database.db
-student-performance/model.pkl
-student-performance/model/
+# student-performance/model.pkl
+# student-performance/model/
 
 # Editor / OS noise
 .DS_Store
